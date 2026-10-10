@@ -152,7 +152,7 @@ export const App: React.FC = () => {
                   </span>
                 </div>
                 <p className="text-xs text-slate-500 mt-1">
-                  Model: {health?.checks.gemini_model || 'gemini-2.5-flash'}
+                  Model: {health?.checks.gemini_model || 'gemini-3.5-flash'}
                 </p>
               </div>
             </div>

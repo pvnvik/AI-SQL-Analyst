@@ -23,7 +23,7 @@ class Settings(BaseSettings):
 
     # Gemini LLM Provider
     google_api_key: Optional[str] = Field(default=None, alias="GOOGLE_API_KEY")
-    gemini_model: str = Field(default="gemini-2.5-flash", alias="GEMINI_MODEL")
+    gemini_model: str = Field(default="gemini-3.5-flash", alias="GEMINI_MODEL")
 
     # LangSmith Tracing
     langsmith_api_key: Optional[str] = Field(default=None, alias="LANGSMITH_API_KEY")

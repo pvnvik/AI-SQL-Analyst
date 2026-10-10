@@ -63,7 +63,7 @@ cp .env.example .env
 
 Set your configuration values:
 - `GOOGLE_API_KEY`: Your Google Gemini API key.
-- `GEMINI_MODEL`: `gemini-2.5-flash` (or your preferred Gemini model).
+- `GEMINI_MODEL`: `gemini-3.5-flash` (or your preferred Gemini model).
 - `DATABASE_URL`: Connection string for PostgreSQL (configured for read-only user in Milestone 2).
 - `LANGSMITH_API_KEY`: (Optional) LangSmith API key for workflow tracing.
 - `LANGSMITH_TRACING`: Set to `true` to enable tracing or `false` for local offline operation.
@@ -119,7 +119,7 @@ Response:
   "version": "0.1.0",
   "checks": {
     "gemini_configured": true,
-    "gemini_model": "gemini-2.5-flash",
+    "gemini_model": "gemini-3.5-flash",
     "database_configured": false,
     "database_dialect": "postgres",
     "langsmith_configured": true
