@@ -19,7 +19,7 @@ export interface HealthResponse {
 }
 
 export interface ValidationInfo {
-  status: 'passed' | 'rejected_unsafe_sql' | 'rejected_invalid_sql' | 'rejected_unknown_schema_reference' | 'repair_attempted' | 'repair_limit_reached';
+  status: string;
   messages: string[];
 }
 
@@ -56,4 +56,26 @@ export interface QueryResponse {
 
 export interface QueryRequest {
   question: string;
+}
+
+export interface ColumnSchema {
+  name: string;
+  type: string;
+  nullable: boolean;
+  primary_key: boolean;
+  foreign_key?: string | null;
+}
+
+export interface TableSchema {
+  name: string;
+  description: string;
+  columns: ColumnSchema[];
+  primary_keys: string[];
+}
+
+export interface DatabaseSchemaResponse {
+  dialect: string;
+  tables: TableSchema[];
+  approved_tables_count: number;
+  revenue_rule: string;
 }

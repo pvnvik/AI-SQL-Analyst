@@ -70,3 +70,29 @@ class QueryResponse(BaseModel):
     validation: ValidationInfo
     execution: ExecutionInfo
     trace: TraceInfo
+
+
+class ColumnSchema(BaseModel):
+    """Column definition for GET /api/schema."""
+    name: str = Field(..., description="Column name")
+    type: str = Field(..., description="SQL data type")
+    nullable: bool = Field(..., description="Whether column accepts NULL")
+    primary_key: bool = Field(False, description="Whether column is part of primary key")
+    foreign_key: Optional[str] = Field(None, description="Referenced table and column if foreign key")
+
+
+class TableSchema(BaseModel):
+    """Table definition for GET /api/schema."""
+    name: str = Field(..., description="Table name")
+    description: str = Field("", description="Human-readable table description")
+    columns: List[ColumnSchema] = Field(default_factory=list, description="List of columns")
+    primary_keys: List[str] = Field(default_factory=list, description="Primary key columns")
+
+
+class DatabaseSchemaResponse(BaseModel):
+    """Response payload for GET /api/schema."""
+    dialect: str = Field(..., description="Database dialect")
+    tables: List[TableSchema] = Field(default_factory=list, description="Approved tables")
+    approved_tables_count: int = Field(..., description="Total count of approved tables")
+    revenue_rule: str = Field(..., description="Domain revenue calculation definition")
+

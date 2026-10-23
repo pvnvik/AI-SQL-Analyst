@@ -6,8 +6,11 @@ from typing import AsyncGenerator
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app import __version__
-from app.api.routes import health
+from app.api.routes import health, query, schema
 from app.config import get_settings
+from app.database.connection import check_connection
+
+from app.services.tracing import setup_langsmith_tracing
 
 # Configure structured logging
 logging.basicConfig(
@@ -28,6 +31,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         "Configured" if settings.is_database_configured else "Default/Placeholder",
         "Enabled" if settings.is_langsmith_configured else "Disabled/Unconfigured",
     )
+    # Initialize tracing configuration
+    setup_langsmith_tracing()
     yield
     logger.info("Shutting down QueryPilot API")
 
@@ -59,6 +64,8 @@ def create_app() -> FastAPI:
 
     # Register API routers
     app.include_router(health.router, prefix="/api")
+    app.include_router(schema.router, prefix="/api")
+    app.include_router(query.router, prefix="/api")
 
     @app.get("/")
     async def root():
